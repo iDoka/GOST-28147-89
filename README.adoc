@@ -22,11 +22,11 @@ This implementation provide trade off size and performance. The goal was to be a
 
 
 |===============================================
-|Date published | 1989
-|Structure      | Feistel network
-|Key sizes      | 256 bits
-|Block sizes    | 64 bits
-|Rounds         | 32
+| *Date published* | 1989
+| *Structure*      | Feistel network
+| *Key sizes*      | 256 bits
+| *Block sizes*    | 64 bits
+| *Rounds*         | 32
 |===============================================
 
 == Features
@@ -41,7 +41,6 @@ This implementation provide trade off size and performance. The goal was to be a
 == Status
 
 * Core implementations have been tested on a Xilinx Spartan-3E FPGA succesfully
-* This core is done. Initial Release: Apr. 17, 2012
 
 == Employment
 
