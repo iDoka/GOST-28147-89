@@ -1,0 +1,108 @@
+= GOST 28147-89 Verilog HDL code
+Dmitry Murzinov <kakstattakim@gmail.com>
+v1.0, 15.06.2016
+:doctype: article
+:lang: en
+:stem:
+:grid: all
+:align: center
+:imagesdir: example???
+:homepage: http://idoka.ru
+
+
+
+== Description
+
+This is a implementation of the GOST 28147-89 - a Soviet and Russian government standard symmetric key block cipher (now as part of standard https://en.wikipedia.org/wiki/Kuznyechik[GOST R 34.12-2015]).
+GOST 28147-89 has a 64-bit blocksize and 256-bit keysize.
+
+This implementation provide trade off size and performance. The goal was to be able to fit in to a low cost Xilinx Spartan series FPGA and still be as fast as possible. As one can see from the implementation results below, this goal has been achieved.
+
+=== Short Chipher Detail
+
+
+|===============================================
+|Date published | 1989
+|Structure      | Feistel network
+|Key sizes      | 256 bits
+|Block sizes    | 64 bits
+|Rounds         | 32
+|===============================================
+
+== Features
+
+* SystemVerilog RTL and TB code is provided
+* Implements both encryption and decryption in the same block
+* GOST 28147-89 algorithm focusing on very low area applications
+* Implementation takes about 32 cycles to encrypt/decrypt a block
+* EBC-cipher mode support
+* The core complies to use of S-box according to RFC4357/GOST R34.11-94 or RFC5830 (by synthesis), or S-box switch "on the fly" (realtime).
+
+== Status
+
+* Core implementations have been tested on a Xilinx Spartan-3E FPGA succesfully
+* This core is done. Initial Release: Apr. 17, 2012
+
+== Employment
+
+For run synthesize design using Synplify tool use command:
+
+  $ make synthesis
+
+To compile and run simulation RTL-design using ModelSim with CLI:
+
+  $ make sim
+
+To compile and run simulation RTL-design using ModelSim with GUI:
+
+  $ make sim-gui
+
+In order to determine which S-box will be used for synthesis/simulation you must to pass apropriate define by command line argument:
+
+* `GOST_R_3411_TESTPARAM` - for RFC4357 S-box using
+* `GOST_R_3411_CRYPTOPRO` - for RFC5830 S-box using
+* `GOST_R_3411_BOTH`      - both RFC4357 and RFC5830 S-boxes using with switching "on the fly"
+
+
+All procedures like synthesis or simulation was tested on the Linux environment (x86_64 host).
+
+Synthesis
+
+Sample Synthesis Results for the ECB-mode GOST 28147-89
+
+```
+Technology 	       Size/Area 	Speed/Performance
+==============================================================
+Xilinx Spartan-3E      525 LUTs         75 Mhz (150 Mbits/sec)
+```
+
+
+== Limitations
+
+The design uses SystemVerilog as language for RTL-implementation therefore your Design Tools should support SystemVerilog for synthesis and simulation.
+
+
+== ToDo
+
+* Implementation testing with support Botan crypto-lib. It can be used in a DPI-based testbench as golden model or test vector generator
+* Support for following cipher modes: CBC, CFB, OFB (and maybe CTR)
+* Adding SoC-buses compatibility for seamless integration
+
+
+== References
+
+* http://en.wikipedia.org/wiki/GOST_%28block_cipher%29[Description of GOST 28147-89 (ENGLISH)]
+* http://www.inssl.com/standart-of-cipher.html[Description of GOST 28147-89 (RUSSIAN)]
+* https://ru.wikipedia.org/wiki/%D0%93%D0%9E%D0%A1%D0%A2_%D0%A0_34.10-2012[Digital signature standard GOST R 34.10-2012 (RUSSIAN)]
+* https://en.wikipedia.org/wiki/GOST_%28hash_function%29[Hash function GOST R 34.11-94 (ENGLISH)]
+* https://ru.wikipedia.org/wiki/%D0%93%D0%9E%D0%A1%D0%A2_%D0%A0_34.11-94[Hash function GOST R 34.11-94 (RUSSIAN)]
+* http://csrc.nist.gov/publications/nistpubs/800-38a/sp800-38a.pdf[NIST SP800-38A: Recommendation for Block Cipher Modes of Operation]
+* https://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%B6%D0%B8%D0%BC_%D1%88%D0%B8%D1%84%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F[Block cipher mode of operation (RUSSIAN)]
+* https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation[Block cipher mode of operation (ENGLISH)]
+* https://webstore.iec.ch/preview/info_isoiec18033-3%7Bed2.0%7Den.pdf[ISO/IEC 18033-3 Information technology — Security techniques — Encryption algorithms — Part 3: Block ciphers]
+* https://tools.ietf.org/html/rfc5831[RFC5831: GOST R 34.11-94 Hash Function Algorithm]
+* https://tools.ietf.org/html/rfc4357[RFC4357: Additional Cryptographic Algorithms for Use with GOST 28147-89, GOST R 34.10-94, GOST R 34.10-2001, and GOST R 34.11-94 Algorithms]
+* https://tools.ietf.org/html/rfc4490[RFC4490: Using the GOST 28147-89, GOST R 34.11-94, GOST R 34.10-94, and GOST R 34.10-2001 Algorithms with Cryptographic Message Syntax (CMS)]
+
+
+Feel free to send me comments, suggestions and bug reports
