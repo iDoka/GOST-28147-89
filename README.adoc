@@ -65,7 +65,7 @@ In order to determine which S-box will be used for synthesis/simulation you must
 
 All procedures like synthesis or simulation was tested on the Linux environment (x86_64 host).
 
-Synthesis
+=== Synthesis
 
 Sample Synthesis Results for the ECB-mode GOST 28147-89
 
