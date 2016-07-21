@@ -1,23 +1,5 @@
-//////////////////////////////////////////////////////////////////////
-////                                                              ////
-////  TODO                                                        ////
-////                                                              ////
-////  This file is part of the GOST 28147-89 CryptoCore project   ////
-////                                                              ////
-////  Author(s):                                                  ////
-////      -  Dmitry Murzinov (kakstattakim@gmail.com)             ////
-////                                                              ////
-////                                                              ////
-//////////////////////////////////////////////////////////////////////
+= ToDo
 
-// SVN Revision History
-//
-// $Log:  $
-// 
-// 
-
-
-TODO:
-
-   - Implementation testing with support Botan crypto-lib (VPI-based testbench). 
-   
+* Implementation testing with support Botan crypto-lib. It can be used in a DPI-based testbench as golden model or test vector generator
+* Support for following cipher modes: CBC, CFB, OFB (and maybe CTR)
+* Adding SoC-buses compatibility for seamless integration

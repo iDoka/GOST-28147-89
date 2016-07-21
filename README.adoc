@@ -81,11 +81,11 @@ Xilinx Spartan-3E      525 LUTs         75 Mhz (150 Mbits/sec)
 The design uses SystemVerilog as language for RTL-implementation therefore your Design Tools should support SystemVerilog for synthesis and simulation.
 
 
-== ToDo
+// ToDo chapter
+include::TODO.adoc[leveloffset=+1]
 
-* Implementation testing with support Botan crypto-lib. It can be used in a DPI-based testbench as golden model or test vector generator
-* Support for following cipher modes: CBC, CFB, OFB (and maybe CTR)
-* Adding SoC-buses compatibility for seamless integration
+// BUGS chapter
+include::BUGS.adoc[leveloffset=+1]
 
 
 == References
