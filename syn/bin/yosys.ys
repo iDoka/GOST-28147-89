@@ -1,0 +1,17 @@
+### read design
+read_verilog -sv -DGOST_R_3411_TESTPARAM -I../../rtl ../../rtl/gost_28147_89.v
+synth_xilinx -flatten -retime -edif ../out/fpga_synth.edif -top gost_28147_89
+
+
+### highlevel synthesis
+#hierarchy -check -top HammingDecoder
+#proc; opt; fsm; opt; techmap; opt
+
+### mapping logic to LUTs using Berkeley ABC
+#abc -lut 4; opt
+
+### map internal cells to FPGA cells
+#techmap -map fpga_cells.v; opt
+
+### write netlist
+#write_verilog ../out/fpga_synth.v
