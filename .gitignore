@@ -47,3 +47,10 @@ a.out
 #### was added custom files:
 rtl/sbox.vh
 sim/bin/test
+
+#### dump files
+*.vcd
+*.lxt
+
+#### iverilog compiled binaries
+*.vvp
