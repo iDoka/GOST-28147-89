@@ -1,0 +1,47 @@
+[*] GTKWave Analyzer v3.3.61 (w)1999-2014 BSI
+[*]
+[dumpfile] "gost_28147_89.vcd"
+[dumpfile_mtime] "Fri Jul 22 12:25:13 2016"
+[dumpfile_size] 4145
+[savefile] "gost_28147_89.gtkw"
+[timestart] 0
+[size] 2071 1068
+[pos] -1 -1
+*-16.000000 48600 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb.
+[treeopen] tb.u_cipher.
+[sst_width] 218
+[signals_width] 360
+[sst_expanded] 1
+[sst_vpaned_height] 306
+@28
+tb.u_cipher.rst[0]
+[color] 3
+tb.u_cipher.clk[0]
+tb.u_cipher.select[0]
+tb.u_cipher.kload[0]
+@23
+[color] 7
+tb.u_cipher.key[255:0]
+@28
+tb.u_cipher.load[0]
+@22
+[color] 2
+tb.u_cipher.pdata[63:0]
+@28
+tb.u_cipher.done[0]
+@22
+[color] 6
+tb.u_cipher.cdata[63:0]
+tb.u_cipher.a[31:0]
+tb.u_cipher.b[31:0]
+@28
+tb.u_cipher.dec_index[2:0]
+tb.u_cipher.enc_index[2:0]
+@24
+tb.u_cipher.i[4:0]
+@28
+tb.u_cipher.kindex[2:0]
+tb.u_cipher.mode[0]
+[pattern_trace] 1
+[pattern_trace] 0

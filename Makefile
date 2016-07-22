@@ -13,7 +13,7 @@
 PROJECT=gost_28147_89
 SOURCES=$(PROJECT).v
 
-DEFINE=GOST_R_3411_TESTPARAM
+DEFINE=GOST_SBOX_TESTPARAM
 
 
 SIM_DIR=./sim/bin
@@ -82,12 +82,12 @@ iverilog: icarus icarus-wave
 icarus:
 	@cd $(SIM_DIR);\
 	$(IVERILOG_SETUP);\
-	iverilog  -g2005-sv -I../../rtl -DGOST_R_3411_TESTPARAM -s gost_28147_89 -o test ../src/gost_28147_89_tb.v  ../../rtl/gost_28147_89.v;\
-	vvp test;\
+	iverilog  -g2005-sv -I../../rtl -D$(DEFINE) -s tb -o $(PROJECT).vvp ../src/$(PROJECT)_tb.v  ../../rtl/$(PROJECT).v;\
+	vvp -n $(PROJECT).vvp -lxt2;\
 	cd $(CUR_DIR);
 
 icarus-wave:
-	@gtkwave sim/bin/test.vcd &
+	@gtkwave $(SIM_DIR)/$(PROJECT).vcd $(SIM_DIR)/$(PROJECT).gtkw &
 
 
 ############### SYN target ###############

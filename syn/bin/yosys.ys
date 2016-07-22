@@ -1,5 +1,5 @@
 ### read design
-read_verilog -sv -DGOST_R_3411_TESTPARAM -I../../rtl ../../rtl/gost_28147_89.v
+read_verilog -sv -DGOST_SBOX_TESTPARAM -I../../rtl ../../rtl/gost_28147_89.v
 synth_xilinx -flatten -retime -edif ../out/fpga_synth.edif -top gost_28147_89
 
 

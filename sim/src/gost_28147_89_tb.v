@@ -120,8 +120,8 @@ always  @( posedge done )
 /////////////// dumping
 initial
  begin
-    $dumpfile("test.vcd");
-    $dumpvars(0,u_cipher);
+    $dumpfile("gost_28147_89.vcd");
+    $dumpvars(0,tb);
  end
 
 

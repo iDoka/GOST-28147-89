@@ -27,7 +27,7 @@ set dir_work ../run
 set dir_inc  $dir_src+$dir_sim+../../rtl/tech
 
 ## set project defines
-set DEFINE GOST_R_3411_TESTPARAM
+set DEFINE GOST_SBOX_TESTPARAM
 
 #####################################################
 quit -sim
