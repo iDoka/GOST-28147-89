@@ -13,6 +13,9 @@
 PROJECT=gost_28147_89
 SOURCES=$(PROJECT).v
 
+DEFINE=GOST_R_3411_TESTPARAM
+
+
 SIM_DIR=./sim/bin
 SYN_DIR=./syn/bin
 CUR_DIR=$(shell pwd)
@@ -30,10 +33,8 @@ SYN_LOG=../log/$(PROJECT).log
 SIM_LOG=../log/$(PROJECT).log
 
 #######################################################################
-all: synthesis
+all: syn
 default_target: help
-
-synthesis: syn
 
 ##### HELP target #####
 help:
@@ -50,8 +51,14 @@ help:
 	@echo " make clean        : remove all temporary files"
 	@echo ""
 
+sbox-gen:
+	gcc -D$(DEFINE) -o s-box-generator syn/src/s-box-generator.c
+	./s-box-generator > rtl/sbox.vh
+	rm s-box-generator
+
+
 ############### SIM target ###############
-sim:     iverilog
+sim:  sbox-gen   iverilog
 sim-gui: modelsim-gui
 
 ##### Mentor Modelsim #####
@@ -84,12 +91,12 @@ icarus-wave:
 
 
 ############### SYN target ###############
-syn: yosys
+syn: sbox-gen yosys
 
 ##### Yosys #####
 yosys:
 	@cd $(SYN_DIR);\
-	yosys -Q -T -s yosys.ys -L $(SYN_LOG);\
+	yosys -Q -T -v 2 -s yosys.ys -L $(SYN_LOG);\
 	cd $(CUR_DIR);
 
 ##### Synplify #####

@@ -24,7 +24,8 @@ module gost_28147_89 (clk, rst, mode, select, load, done, kload, key, pdata, cda
   input  [63:0] pdata; //  plain text input
   output [63:0] cdata; // cipher text output
 
-`include "gost-sbox.vh"
+//`include "gost-sbox.vh"
+`include "sbox.vh"
 
 reg [4:0] i; // cipher cycles counter: 0..31;
 
