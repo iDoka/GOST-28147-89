@@ -36,7 +36,17 @@ This implementation provide trade off size and performance. The goal was to be a
 * GOST 28147-89 algorithm focusing on very low area applications
 * Implementation takes about 32 cycles to encrypt/decrypt a block
 * EBC-cipher mode support
+////
 * The core complies to use of S-box according to RFC4357/GOST R34.11-94 or RFC5830 (by synthesis), or S-box switch "on the fly" (realtime).
+////
+* Now support following set of S-boxes (names on accordence with https://tools.ietf.org/html/rfc4357[RFC4357])
+** `id-GostR3411-94-TestParamSet`
+** `id-Gost28147-89-CryptoPro-A-ParamSet`
+** `id-Gost28147-89-CryptoPro-B-ParamSet`
+** `id-Gost28147-89-CryptoPro-C-ParamSet`
+** `id-Gost28147-89-CryptoPro-D-ParamSet`
+** `id-tc26-gost-28147-param-Z`
+** additional R34.11-94 CryptoPro S-box supported
 
 == Status
 
@@ -58,10 +68,18 @@ To compile and run simulation RTL-design using ModelSim with GUI:
 
 In order to determine which S-box will be used for synthesis/simulation you must to pass apropriate define by command line argument:
 
-* `GOST_R_3411_TESTPARAM` - for RFC4357 S-box using
-* `GOST_R_3411_CRYPTOPRO` - for RFC5830 S-box using
-* `GOST_R_3411_BOTH`      - both RFC4357 and RFC5830 S-boxes using with switching "on the fly"
+* `GOST_SBOX_TESTPARAM` - for *id-GostR3411-94-TestParamSet* S-box using
+* `GOST_SBOX_CRYPTOPRO_A` - for *id-Gost28147-89-CryptoPro-A-ParamSet* S-box using
+* `GOST_SBOX_CRYPTOPRO_B` - for *id-Gost28147-89-CryptoPro-B-ParamSet* S-box using
+* `GOST_SBOX_CRYPTOPRO_C` - for *id-Gost28147-89-CryptoPro-C-ParamSet* S-box using
+* `GOST_SBOX_CRYPTOPRO_D` - for *id-Gost28147-89-CryptoPro-D-ParamSet* S-box using
+* `GOST_SBOX_TC26_Z` - for *id-tc26-gost-28147-param-Z* S-box using
+* `GOST_SBOX_R3411` - for GOST R34.11-94 CryptoPro S-box using
 
+
+////
+* `GOST_R_3411_BOTH`      - both RFC4357 and RFC5830 S-boxes using with switching "on the fly"
+////
 
 All procedures like synthesis or simulation was tested on the Linux environment (x86_64 host).
 
