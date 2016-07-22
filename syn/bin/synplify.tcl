@@ -30,7 +30,7 @@ set_option -top_module "gost_28147_89"
 set_option -vlog_std sysv
 set_option -project_relative_includes 1
 set_option -enable64bit 1
-set_option -hdl_define -set GOST_R_3411_TESTPARAM
+set_option -hdl_define -set GOST_SBOX_TESTPARAM
 set_option -include_path "../../rtl"
 set_option -default_enum_encoding default
 set_option -resource_sharing 1
