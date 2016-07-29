@@ -6,7 +6,7 @@
 //   Copyright (c) 2014 Dmitry Murzinov (kakstattakim@gmail.com)   //
 /////////////////////////////////////////////////////////////////////
 
-`timescale 1ns / 100ps
+`timescale 1ns / 1ns
 
 module tb ();
 
@@ -18,7 +18,7 @@ parameter clk_delay    =  0;  // clk initial delay
 reg clk;    // clock
 reg rst;    // sync reset
 reg mode;   // 0 - encrypt, 1 - decrypt
-reg select; // if GOST_R_3411_BOTH defined: 0 - Using the GOST R 34.11-94 TestParameter S-boxes; 1 - Using the CryptoPro S-boxes
+//reg select; // if GOST_R_3411_BOTH defined: 0 - Using the GOST R 34.11-94 TestParameter S-boxes; 1 - Using the CryptoPro S-boxes
 reg load;   // load plain text and start cipher cycles
 wire done;  // cipher text ready for output read
 reg kload;  // load cipher key
@@ -41,10 +41,9 @@ gost_28147_89
     .clk(clk),
     .rst(rst),
     .mode(mode),
-    .select(select),
     .load(load),
     .done(done),
-    .kload(kload),
+    //.kload(kload),
     .key(key),
     .pdata(pdata),
     .cdata(cdata)
@@ -65,7 +64,7 @@ initial begin
     load = 0;
     kload = 0;
     mode  = 0;
-    select = 0;
+    //select = 0;
     key = 256'h0;
     pdata = 64'h0;
     clk_counter = 0;

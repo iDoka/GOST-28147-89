@@ -18,7 +18,7 @@ int main(int argc, const char *argv[]) {
   int i, j;
   uint8_t index;
 
-  printf("\n\n`define Sbox(x,sel) {S8(x[31:28]),S7(x[27:24]),S6(x[23:20]),S5(x[19:16]),S4(x[15:12]),S3(x[11:8]),S2(x[7:4]),S1(x[3:0])}\n");
+  printf("\n\n`define Sbox(x) {S8(x[31:28]),S7(x[27:24]),S6(x[23:20]),S5(x[19:16]),S4(x[15:12]),S3(x[11:8]),S2(x[7:4]),S1(x[3:0])}\n");
 
 
   for ( i = 0; i < 8; i++ ) {
