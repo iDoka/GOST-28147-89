@@ -52,9 +52,9 @@ help:
 	@echo ""
 
 sbox-gen:
-	gcc -D$(DEFINE) -o s-box-generator syn/src/s-box-generator.c
-	./s-box-generator > rtl/sbox.vh
-	rm s-box-generator
+	@gcc -D$(DEFINE) -o s-box-generator syn/src/s-box-generator.c
+	@./s-box-generator > rtl/sbox.vh
+	@rm s-box-generator
 
 
 ############### SIM target ###############
@@ -81,6 +81,7 @@ iverilog: icarus icarus-wave
 
 icarus:
 	@cd $(SIM_DIR);\
+	rm -rf $(PROJECT).vvp;\
 	$(IVERILOG_SETUP);\
 	iverilog  -g2005-sv -I../../rtl -D$(DEFINE) -s tb -o $(PROJECT).vvp ../src/$(PROJECT)_tb.v  ../../rtl/$(PROJECT).v;\
 	vvp -n $(PROJECT).vvp -lxt2;\
@@ -106,6 +107,13 @@ synplify:
 		synplify_pro -enable64bit -batch synplify.tcl;\
 		cd $(CUR_DIR);
 
+
+##### Vivado #####
+vivado: sbox-gen
+	@vivado -nojournal -nolog -mode batch -source $(SYN_DIR)/vivado.tcl
+	-@grep VIOLATED syn/log/post_route_timing_worst.rpt
+
+
 ##### PHONY target #####
-.PHONY : clean syn sim
+.PHONY : clean syn sim yosys synplify vivado ise modelsim iverilog icarus
 
