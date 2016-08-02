@@ -50,7 +50,7 @@ set_hierarchy_separator /
 create_clock -period 2.9 -name CLK [get_ports $CLOCK]
 
 #### setting CONFIG ####
-#read_xdc ${DIRBIN}/config.xdc
+read_xdc ${DIRBIN}/config.xdc
 
 #### IO-locate and standard constraints:
 #read_xdc ${DIRBIN}/pinout.xdc
