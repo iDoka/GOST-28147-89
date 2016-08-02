@@ -29,8 +29,12 @@ SYNPLIFY_SETUP:=date
 IVERILOG_SETUP:=. /opt/iverilog.setup
 VERILATOR_SETUP:=. /opt/verilator.setup
 
+VCS_OPT += +plusarg_ignore
+
+REVISION = 1.0
+
 SYN_LOG=../log/$(PROJECT).log
-SIM_LOG=../log/$(PROJECT).log
+SIM_LOG=sim/log/$(PROJECT).log
 
 #######################################################################
 all: syn
@@ -112,6 +116,25 @@ synplify:
 vivado: sbox-gen
 	@vivado -nojournal -nolog -mode batch -source $(SYN_DIR)/vivado.tcl
 	-@grep VIOLATED syn/log/post_route_timing_worst.rpt
+
+
+
+
+
+sim-counter:
+	@$(eval ITEM = counter_rollover)
+	@rm -rf $(ITEM).vvp $(ITEM).vcd
+	@iverilog  -g2005-sv -I./rtl -D$(DEFINE) -s $(ITEM)_tb -o $(ITEM).vvp bench/$(ITEM)_tb.v rtl/$(ITEM).v
+	@vvp -n $(ITEM).vvp -lxt2
+	gtkwave $(ITEM).vcd $(SIM_DIR)/$(ITEM).gtkw &
+
+
+vcs-counter:
+	@export VCS_ARCH_OVERRIDE="linux"
+	@$(eval ITEM = counter_rollover)
+	@-rm -rf $(ITEM).daidir AN.DB/ simv* csrc/ DVEfiles/ *~
+	vcs -full64 -l $(SIM_LOG) -debug_all +v2k -v2005 +lint=TFIPC-L +lint=all,noVCDE,noZERO +warn=all +error+1024 bench/$(ITEM)_tb.v rtl/$(ITEM).v $(VCS_OPT) +define+$(DEFINE) +incdir+./rtl -o $(ITEM)
+	@-grep --color -i 'Error' $(SIM_LOG)
 
 
 ##### PHONY target #####
