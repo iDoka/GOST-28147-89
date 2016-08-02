@@ -51,6 +51,16 @@ sim/bin/test
 #### dump files
 *.vcd
 *.lxt
+*.lx2
 
 #### iverilog compiled binaries
 *.vvp
+
+# vcs garbage
+csrc/
+*.daidir/
+AN.DB/
+.vlogansetup*
+
+# modelsim
+work/
