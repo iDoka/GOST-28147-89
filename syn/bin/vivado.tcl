@@ -22,7 +22,7 @@ set TOP     gost_28147_89
 set CLOCK   clk
 
 ### Sources specify
-set RTL_SRC ${DIRRTL}/gost_28147_89.v
+set RTL_SRC ${DIRRTL}/${TOP}.v
 set RTL_INC "$DIRRTL"
 
 ### Project defines
