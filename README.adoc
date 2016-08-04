@@ -120,6 +120,6 @@ include::BUGS.adoc[leveloffset=+1]
 * https://tools.ietf.org/html/rfc5831[RFC5831: GOST R 34.11-94 Hash Function Algorithm]
 * https://tools.ietf.org/html/rfc4357[RFC4357: Additional Cryptographic Algorithms for Use with GOST 28147-89, GOST R 34.10-94, GOST R 34.10-2001, and GOST R 34.11-94 Algorithms]
 * https://tools.ietf.org/html/rfc4490[RFC4490: Using the GOST 28147-89, GOST R 34.11-94, GOST R 34.10-94, and GOST R 34.10-2001 Algorithms with Cryptographic Message Syntax (CMS)]
-
+* https://www.tc26.ru/methods/recommendation/%D0%A2%D0%9A26%D0%A3%D0%97.pdf[Recommendation of definition S-box (id-tc26-gost-28147-param-Z) for GOST 28147-89 (RUSSIAN)]
 
 Feel free to send me comments, suggestions and bug reports
