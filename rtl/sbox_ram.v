@@ -9,7 +9,7 @@ module sbox_ram (
     input   wire       CEN, // ChipEnable
     input   wire       WEN, // Write (otherwise read)
     input   wire      INIT, // 0 - normal mode, 1 - loading S-box
-    input   wire [31:0] SA, // SBox Individual Address
+    input   wire [31:0] SA, // SBox Individual Addresses
     input   wire  [3:0] CA, // Common Address for All rams
     input   wire [31:0] SI, // Data Input
     output  reg  [31:0] SO  // Data output
