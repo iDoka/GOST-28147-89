@@ -22,11 +22,12 @@ reg [(W/N)-1:0] cnt [N-1:0];
 wire [N-1:0] tc; // TerminalCount
 wire [N-1:0] ro; // RollOver
 
+
 genvar k;
 generate
-  for (k=0;k<N;k=k+1) begin
+  for (k=0;k<N;k=k+1) begin: gen_counter
 
-    assign tc[k] = (k==0) ? 1'b1 : (& cnt[k]);
+    assign tc[k] = (k==0) ? 1'b1 : (tc[k-1] && (& cnt[k-1]));
     assign ro[k] = tc[k] & ENABLE;
 
     always @(posedge CLK) begin
@@ -44,7 +45,8 @@ endgenerate
 `ifndef SYNTHESIS
   integer kk;
   initial begin
-    for (kk=0;kk<N;kk=kk+1)
+  $dumpfile("counter_rollover.vcd");
+  for (kk=0;kk<N;kk=kk+1)
       $dumpvars(0,cnt[kk]);
   end
 `endif

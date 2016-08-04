@@ -125,8 +125,8 @@ sim-counter:
 	@$(eval ITEM = counter_rollover)
 	@rm -rf $(ITEM).vvp $(ITEM).vcd
 	@iverilog  -g2005-sv -I./rtl -D$(DEFINE) -s $(ITEM)_tb -o $(ITEM).vvp bench/$(ITEM)_tb.v rtl/$(ITEM).v
-	@vvp -n $(ITEM).vvp -lxt2
-	gtkwave $(ITEM).vcd $(SIM_DIR)/$(ITEM).gtkw &
+	@vvp -n $(ITEM).vvp -fst
+	@gtkwave $(ITEM).vcd $(SIM_DIR)/$(ITEM).gtkw &
 
 
 vcs-counter:

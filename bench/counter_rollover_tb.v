@@ -9,7 +9,9 @@
 ///////////////// Cascaded Synchronous Counter /////////////////
 module counter_rollover_tb();
 
-parameter WIDTH_DATA = 8;
+parameter WIDTH_DATA   = 16;
+parameter PART_OF_DATA = 4;
+
 
 // clock generator settings:
 parameter cycles_reset =  2;  // rst active  (clk)
@@ -31,10 +33,10 @@ reg [WIDTH_DATA-1:0] clk_counter; // clock counter for reference
 wire EQUAL = (data == clk_counter);
 wire [8*4-1:0] STATUS = EQUAL ? "OK" : "FAIL";
 
-// DUT
+////////////// DUT //////////////
 counter_rollover
 #(.W(WIDTH_DATA), // width of counter
-  .N(2)) // how many parts contain counter?
+  .N(PART_OF_DATA)) // how many parts contain counter?
 counter_rollover_u0(
   .CLK(clk),
   .ENABLE(enable),
@@ -71,8 +73,8 @@ initial begin
   @(posedge clk)
     load = 0;
 
-  #(clk_period*20);
-  $finish;
+  //#(clk_period*260);
+  //$finish;
   //$finish_and_return(code);
 end
 
@@ -80,12 +82,14 @@ end
 ///// displyaing
 always @(posedge clk)
   if (!load)
-    #1 $display("REFOUT: %03d \t OUT: %03d  ---> %s", clk_counter, data, STATUS);
+    //#1 $display("REFOUT: %0H \t OUT: %0H  ---> %s tc[1]=%b  tc[2]=%b  tc[3]=%b  cnt[0]=%d  cnt[1]=%d cnt[2]=%d", clk_counter, data, STATUS, counter_rollover_u0.tc[1], counter_rollover_u0.tc[2],  counter_rollover_u0.tc[3],counter_rollover_u0.cnt[0], counter_rollover_u0.cnt[1], counter_rollover_u0.cnt[2]);
+    #1 $display("REFOUT->OUT:\t %03d->%03d ---> %s", clk_counter, data, STATUS);
 
 
 ///// condition of end simulation
 always @(posedge clk)
-  if (&data)
+  //if (&data)
+  if ((STATUS == "FAIL") || (&data))
     $finish;
 
 
