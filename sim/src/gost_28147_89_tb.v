@@ -142,7 +142,7 @@ endfunction
 
 // ======= swapkey(key) =======
 function [255:0] swapkey( input [255:0] key );
-logic [31:0] K [0:7];
+reg [31:0] K [0:7];
 begin
     K[0] = swap4(key[255:224]);
     K[1] = swap4(key[223:192]);
