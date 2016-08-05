@@ -75,7 +75,7 @@ reg [4:0] i; // cipher cycles counter: 0..31;
 always @(posedge clk)
   if((state == IDLE) || (state == READY))
     i <= 5'h0;
-  else //if(~&i)
+  else
     i <= i + 1;
 
 wire [2:0] enc_index = (&i[4:3]) ? ~i[2:0] : i[2:0]; // cipher key index for encrypt
@@ -86,19 +86,17 @@ wire [31:0] K [0:7]; // cipher key storage
 assign {K[0],K[1],K[2],K[3],K[4],K[5],K[6],K[7]} = key;
 
 reg   [31:0] b, a; // MSB, LSB of input data
-wire  [31:0] state_addmod32 = a + K[kindex];  // Adding by module 32
-wire  [31:0] state_sbox     = `Sbox(state_addmod32); // S-box replacing
-wire  [31:0] state_shift11  = {state_sbox[20:0],state_sbox[31:21]}; // <<11
+wire  [31:0] addmod32 = a + K[kindex];  // Adding by module 32
+wire  [31:0] sbox     = `Sbox(addmod32); // S-box replacing
+wire  [31:0] shift11  = {sbox[20:0],sbox[31:21]}; // <<11
 
 always @(posedge clk)
   if(rst)
     {b,a} <= {64{1'b0}};
   else if (pvalid && pready) // load plain text and start cipher cycles
     {b,a} <= pdata;
-  else if (state == RUN) begin
-    a <= b ^ state_shift11;
-    b <= a;
-  end
+  else if (state == RUN)
+    {b,a} <= {a, b^shift11};
 
 always @(posedge clk)
   if (state == READY)

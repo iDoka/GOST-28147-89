@@ -32,12 +32,15 @@ wire [63:0] cdata_d; // cipher text output
 
 reg  [63:0] reference_data; // reference data for verify
 
+wire [63:0] data  = {u.a,u.b};
+wire [63:0] data2 = {u.b,u.a};
+
 wire EQUAL = cdata == reference_data;
 wire [8*4-1:0] STATUS = EQUAL ? "OK" : "FAIL";
 
 // instance connect
 gost_28147_89
-  u_cipher  (
+  u (
     .clk(clk),
     .rst(rst),
     .mode(mode),
@@ -113,7 +116,8 @@ always  @( posedge done )
      #1 $display("KEY: %H \nDECRYPT IN: %H \t REFOUT: %H \t OUT: %H   ....%s\n", key, pdata, reference_data, cdata, STATUS);
 
 
-
+always @(posedge clk)
+  #1 $display("i = %H   load=%b done=%b \t data = %H | %H", u.i, u.load, u.done, data, data2);
 
 
 /////////////// dumping
