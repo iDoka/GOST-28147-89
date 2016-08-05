@@ -121,6 +121,18 @@ vivado: sbox-gen
 
 
 
+
+
+
+
+sim-core:
+	@$(eval ITEM = gost28147)
+	@rm -rf $(ITEM).vvp $(ITEM).vcd
+	@iverilog  -g2005-sv -I./rtl -D$(DEFINE) -s tb -o $(ITEM).vvp bench/$(ITEM)_tb.v rtl/$(ITEM).v
+	@vvp -n $(ITEM).vvp -fst
+	@#gtkwave $(ITEM).vcd $(SIM_DIR)/$(ITEM).gtkw &
+
+
 sim-counter:
 	@$(eval ITEM = counter_rollover)
 	@rm -rf $(ITEM).vvp $(ITEM).vcd
@@ -136,6 +148,9 @@ vcs-counter:
 	vcs -full64 -l $(SIM_LOG) -debug_all +v2k -v2005 +lint=TFIPC-L +lint=all,noVCDE,noZERO +warn=all +error+1024 bench/$(ITEM)_tb.v rtl/$(ITEM).v $(VCS_OPT) +define+$(DEFINE) +incdir+./rtl -o $(ITEM)
 	@-grep --color -i 'Error' $(SIM_LOG)
 
+
+clean:
+	@-rm -rf *.{vcd,vvp}
 
 ##### PHONY target #####
 .PHONY : clean syn sim yosys synplify vivado ise modelsim iverilog icarus
