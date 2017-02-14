@@ -16,6 +16,8 @@ v1.0, 15.06.2016
 This is a implementation of the GOST 28147-89 - a Soviet and Russian government standard symmetric key block cipher (now as part of standard https://en.wikipedia.org/wiki/Kuznyechik[GOST R 34.12-2015]).
 GOST 28147-89 has a 64-bit blocksize and 256-bit keysize.
 
+NOTE: Russian description available here: http://idoka.ru/crypto-ip-core-gost-28147-89/
+
 This implementation provide trade off size and performance. The goal was to be able to fit in to a low cost Xilinx Spartan series FPGA and still be as fast as possible. As one can see from the implementation results below, this goal has been achieved.
 
 === Short Chipher Detail
