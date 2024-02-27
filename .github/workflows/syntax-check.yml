@@ -1,0 +1,15 @@
+name: HDL Syntax Check
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the codebase
+      uses: actions/checkout@v2
+    - name: Verilog Syntax Checker
+      uses: dalance/svlint-action@master
+
